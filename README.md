@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/RackSec/srslog.svg?branch=master)](https://travis-ci.org/RackSec/srslog)
+[![Build Status](https://travis-ci.org/EricLagergren/syslog.svg?branch=master)](https://travis-ci.org/EricLagergren/syslog)
 
-# srslog
+# syslog
 
 Go has a `syslog` package in the standard library, but it has the following
 shortcomings:
@@ -25,7 +25,7 @@ Switch from the standard library:
 ```
 import(
     //"log/syslog"
-    syslog "github.com/RackSec/srslog"
+    syslog "github.com/EricLagergren/syslog"
 )
 ```
 
@@ -123,9 +123,5 @@ That will open a new browser tab showing coverage information.
 
 # License
 
-This project uses the New BSD License, the same as the Go project itself.
+This project uses the New BSD License, same as the Go project itself.
 
-# Code of Conduct
-
-Please note that this project is released with a Contributor Code of Conduct.
-By participating in this project you agree to abide by its terms.
