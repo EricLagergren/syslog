@@ -62,7 +62,6 @@ const (
 func validatePriority(p Priority) error {
 	if p < 0 || p > LOG_LOCAL7|LOG_DEBUG {
 		return errors.New("log/syslog: invalid priority")
-	} else {
-		return nil
 	}
+	return nil
 }

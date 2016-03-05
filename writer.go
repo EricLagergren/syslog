@@ -59,17 +59,22 @@ func (w *Writer) Write(b []byte) (int, error) {
 	return w.writeAndRetry(w.priority, string(b))
 }
 
+// WriteString sends a log message to the syslog daemon using the default
+// priority passed into `srslog.New` or the `srslog.Dial*` functions.
+func (w *Writer) WriteString(s string) (int, error) {
+	return w.writeAndRetry(w.priority, s)
+}
+
 // Close closes a connection to the syslog daemon.
-func (w *Writer) Close() error {
+func (w *Writer) Close() (err error) {
 	w.Lock()
 	defer w.Unlock()
 
 	if w.conn != nil {
-		err := w.conn.close()
+		err = w.conn.close()
 		w.conn = nil
-		return err
 	}
-	return nil
+	return err
 }
 
 // Emerg logs a message with severity LOG_EMERG; this overrides the default

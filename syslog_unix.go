@@ -8,20 +8,18 @@ import (
 
 // unixSyslog opens a connection to the syslog daemon running on the
 // local machine using a Unix domain socket. This function exists because of
-// Solaris support as implemented by gccgo.  On Solaris you can not
-// simply open a TCP connection to the syslog daemon.  The gccgo
+// Solaris support as implemented by gccgo. On Solaris you can not
+// simply open a TCP connection to the syslog daemon. The gccgo
 // sources have a syslog_solaris.go file that implements unixSyslog to
 // return a type that satisfies the serverConn interface and simply calls the C
 // library syslog function.
 func unixSyslog() (conn serverConn, err error) {
-	logTypes := []string{"unixgram", "unix"}
-	logPaths := []string{"/dev/log", "/var/run/syslog", "/var/run/log"}
+	logTypes := [...]string{"unixgram", "unix"}
+	logPaths := [...]string{"/dev/log", "/var/run/syslog", "/var/run/log"}
 	for _, network := range logTypes {
 		for _, path := range logPaths {
 			conn, err := net.Dial(network, path)
-			if err != nil {
-				continue
-			} else {
+			if err == nil {
 				return &localConn{conn: conn}, nil
 			}
 		}

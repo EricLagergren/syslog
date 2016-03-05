@@ -519,7 +519,7 @@ func TestConcurrentReconnect(t *testing.T) {
 }
 
 func TestLocalConn(t *testing.T) {
-	messages := make([]string, 0)
+	var messages []string
 	conn := newTestLocalConn(&messages)
 
 	lc := localConn{conn: conn}

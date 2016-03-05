@@ -2,14 +2,11 @@
 
 # syslog
 
-Go has a `syslog` package in the standard library, but it has the following
+Go has a `syslog` package in the [standard library](https://golang.org/pkg/log/syslog/), but it has the following
 shortcomings:
 
 1. It doesn't have TLS support
-2. [According to bradfitz on the Go team, it is no longer being maintained.](https://github.com/golang/go/issues/13449#issuecomment-161204716)
-
-I agree that it doesn't need to be in the standard library. So, I've
-followed Brad's suggestion and have made a separate project to handle syslog.
+2. [According to @bradfitz, it is no longer being maintained.](https://github.com/golang/go/issues/13449#issuecomment-161204716)
 
 This code was taken directly from the Go project as a base to start from.
 
@@ -17,16 +14,12 @@ However, this _does_ have TLS support.
 
 # Usage
 
-Basic usage retains the same interface as the original `syslog` package. We
-only added to the interface where required to support new functionality.
+Basic usage retains the same interface as the original `syslog` package.
 
 Switch from the standard library:
 
 ```
-import(
-    //"log/syslog"
-    syslog "github.com/EricLagergren/syslog"
-)
+import "github.com/EricLagergren/syslog"
 ```
 
 You can still use it for local syslog:
@@ -88,11 +81,12 @@ w.Notice("this is a notice")
 w.Info("this is info")
 w.Debug("this is debug")
 w.Write([]byte("these are some bytes"))
+W.WriteString("these are more byte")
 ```
 
 # Generating TLS Certificates
 
-We've provided a script that you can use to generate a self-signed keypair:
+Provided is a script that you can use to generate a self-signed keypair:
 
 ```
 pip install cryptography
@@ -112,7 +106,7 @@ Run the tests as usual:
 go test
 ```
 
-But we've also provided a test coverage script that will show you which
+But also provided is a test coverage script that will show you which
 lines of code are not covered:
 
 ```
